@@ -1,4 +1,4 @@
-# maze_solver_nodejs
+# Maze Solver Nodejs
 
 Javascript maze solver
 ## Usage
