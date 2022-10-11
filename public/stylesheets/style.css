@@ -254,6 +254,7 @@ main.main-content {
 
 .cell_algo
 {
+    position: relative; 
 	background-image: url(/shapes/algo.svg);
 	background-size: calc(100%) calc(100%);
 	-webkit-animation: algo_in 0.3s;
