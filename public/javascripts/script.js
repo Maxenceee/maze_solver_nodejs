@@ -392,6 +392,7 @@
                                 if (this.node_list_index == this.node_list.length) {
                                     if (!this.found) {
                                         clearInterval(this.my_interval);
+                                        a && _.calnopth();
                                     } else {
                                         this.path = true;
                                         _.plcl(this.start_pos[0], this.start_pos[1]).classList.add("cell_path");
@@ -401,6 +402,7 @@
                                 if (this.path_list_index == this.path_list.length) {
                                     _.plcl(this.target_pos[0], this.target_pos[1]).classList.add("cell_path");
                                     clearInterval(this.my_interval);
+                                    a && _.calnopth();
                                     return;
                                 }
             
@@ -409,12 +411,10 @@
                                 this.path_list_index++;
                             }
                         }, 10);
-                        
-                        if (a) {
-                            setTimeout(() => {
-                                _.rltp("This maze has no solution ! Try another one :)");
-                            }, 1000);
-                        } 
+                    };
+
+                    _.calnopth = () => {
+                        _.rltp("This maze has no solution ! Try another one :)");
                     };
             
                     _.breadth_first = () => {
