@@ -1,18 +1,19 @@
 # Maze Solver Nodejs
 
-Javascript maze solver
+Maze solver fully in Vanilla Javascript and running on Node.JS server.
+
 ## Usage
 
-Open the directory into a terminal and install dependencies by running 
+Clone this project and open current directory into a terminal, then install dependencies by running:
 
 ```sh
-npm i
+npm install
 ```
 
-After installing the dependencies, start the project by running :
+After installing the dependencies, start the project by running:
 
 ```sh
 npm start
 ```
 
-App will be available on localhost at specified port in the bin/www file
+App will be available on localhost at specified port in the bin/www file (> defaultPort)
