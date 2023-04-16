@@ -1,7 +1,9 @@
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var morgan = require('morgan');
+
+var Visitors = require('./resources/scripts/visitors');
 
 var indexRouter = require('./routes/index');
 
@@ -11,11 +13,48 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+/**
+ *  IP logs
+ */
+
+const normalize = function(a) {
+	if (a < 10)
+		return ("0".concat(a));
+	return (a);
+}
+
+morgan.token('ip', (req, res) => {
+    return (req.get('x-forwarded-for') || '').split(',')[0] || req.socket.remoteAddress;
+});
+
+morgan.token('current_time', (req, res) => {
+    let t = new Date();
+    return "\t"+t.getFullYear()+"-"+normalize(t.getMonth()+1)+"-"+normalize(t.getDate())+" "+normalize(t.getHours())+":"+normalize(t.getMinutes())+":"+normalize(t.getSeconds())
+});
+
+morgan.token('server_instance', (req, res) => {
+    return "\tOAuth/API"
+});
+
+morgan.token('methode', (req, res) => {
+    return "\t"+req.method
+});
+
+morgan.token('requested_path', (req, res) => {
+    return "\t"+req.originalUrl
+});
+
+let vi = Visitors.getVisitorsInstance();
+
+app.use(morgan(':ip :current_time :server_instance :methode :requested_path', {stream: vi.accesLogStream}));
+
 
 app.use('/', indexRouter);
 
