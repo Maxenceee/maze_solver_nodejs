@@ -2,6 +2,8 @@
 
 Maze solver fully in Vanilla Javascript and running on Node.JS server.
 
+[Try it here!](https://maze.maxencegama.dev)
+
 ## Usage
 
 Clone this project and open current directory into a terminal, then install dependencies by running:
