@@ -9,7 +9,7 @@
 
 
 
- ___ ___   ____  _____    ___       _____  ___   _      __ __    ___  ____  
+___ ___   ____  _____    ___       _____  ___   _      __ __    ___  ____  
 |   |   | /    ||     |  /  _]     / ___/ /   \ | |    |  |  |  /  _]|    \ 
 | _   _ ||  o  ||__/  | /  [_     (   \_ |     || |    |  |  | /  [_ |  D  )
 |  \_/  ||     ||   __||    _]     \__  ||  O  || |___ |  |  ||    _]|    / 
@@ -23,7 +23,7 @@
 
 
 
- __  __                                                  ____                             
+__  __                                                  ____                             
 |  \/  |   __ _  __  __   ___   _ __     ___    ___     / ___|   __ _   _ __ ___     __ _ 
 | |\/| |  / _` | \ \/ /  / _ \ | '_ \   / __|  / _ \   | |  _   / _` | | '_ ` _ \   / _` |
 | |  | | | (_| |  >  <  |  __/ | | | | | (__  |  __/   | |_| | | (_| | | | | | | | | (_| |
@@ -101,7 +101,6 @@ body {
 draggable-element {
   display: block;
   transform: translate3d(var(--x, 0px), var(--y, 0px), 0px);
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   position: absolute;
@@ -109,6 +108,17 @@ draggable-element {
 draggable-element.circled {
   transition: all 0.5s ease-in-out;
   overflow: hidden;
+}
+draggable-element.float-left {
+  height: 100vh;
+}
+draggable-element.float-left .panel {
+  border-radius: 0 !important;
+  height: 100%;
+  box-shadow: none !important;
+}
+draggable-element.float-left .circled-btn {
+  display: none;
 }
 
 main.main-content {
@@ -167,7 +177,6 @@ main.main-content {
   position: relative;
   width: 100%;
   padding: 10px 10px;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
 }
@@ -213,7 +222,6 @@ main.main-content {
 .ma-btns-c {
   position: relative;
   width: 120px;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   margin: 40px 0 10px;
@@ -274,7 +282,6 @@ main.main-content {
   position: relative;
   background-image: url(/shapes/algo.svg);
   background-size: 100% 100%;
-  -webkit-animation: algo_in 0.3s;
   animation: algo_in 0.3s;
 }
 
@@ -302,15 +309,6 @@ main.main-content {
 .target {
   background-image: url(/shapes/target.svg);
   background-size: 100% 100%;
-}
-
-@-webkit-keyframes algo_in {
-  from {
-    background-size: 0% 0%;
-  }
-  to {
-    background-size: 100% 100%;
-  }
 }
 @keyframes algo_in {
   from {
@@ -356,7 +354,6 @@ main.main-content {
 .ad-error-panel {
   position: relative;
   width: 300px;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   border-radius: 25px;
@@ -547,8 +544,6 @@ body.desktop .nf-back:hover {
   padding-top: 12px;
   padding-bottom: 13px;
   width: 100%;
-  border-top-right-radius: 24px;
-  border-top-left-radius: 24px;
   display: flex;
   justify-content: center;
   font-size: 14px;
@@ -556,10 +551,8 @@ body.desktop .nf-back:hover {
   font-weight: 600;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -ms-user-select: none;
   user-select: none;
   overflow: hidden;
-  cursor: -webkit-grab;
   cursor: grab;
 }
 .panel-header .menu-close {
@@ -650,6 +643,17 @@ body.desktop .nf-back:hover {
   cursor: default;
 }
 
+.panel-placement {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 100%;
+  border: solid 3px #62C1F3;
+  background-color: rgba(98, 193, 243, 0.5);
+  z-index: 101;
+}
+
 .ad-pn-c, .ad-pn-cp {
   position: fixed;
   top: 0;
@@ -666,7 +670,6 @@ body.desktop .nf-back:hover {
 .ad-pn-c .ad-panel, .ad-pn-c .ad-status-panel, .ad-pn-cp .ad-panel, .ad-pn-cp .ad-status-panel {
   position: relative;
   width: 350px;
-  height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   border-radius: 15px;
@@ -679,8 +682,7 @@ body.desktop .nf-back:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  -webkit-animation: show-pan 0.3s ease-in-out forwards;
-          animation: show-pan 0.3s ease-in-out forwards;
+  animation: show-pan 0.3s ease-in-out forwards;
 }
 .ad-pn-c .ad-panel .ad-err, .ad-pn-c .ad-status-panel .ad-err, .ad-pn-cp .ad-panel .ad-err, .ad-pn-cp .ad-status-panel .ad-err {
   height: 100%;
@@ -747,17 +749,6 @@ body.desktop .nf-back:hover {
   text-align: center;
 }
 
-@-webkit-keyframes show-pan {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes show-pan {
   0% {
     opacity: 0;
@@ -787,80 +778,43 @@ body.desktop .nf-back:hover {
   transform: translate(-50%, -50%);
 }
 .inner-loader:before {
-  -webkit-animation: before 2s infinite;
-          animation: before 2s infinite;
+  animation: before 2s infinite;
 }
 .inner-loader:after {
-  -webkit-animation: after 2s infinite;
-          animation: after 2s infinite;
-}
-
-@-webkit-keyframes before {
-  0% {
-    width: 0.5em;
-    box-shadow: 1em -0.5em hsla(337deg, 84%, 48%, 0.75), -1em 0.5em hsla(190deg, 61%, 65%, 0.75);
-  }
-  35% {
-    width: 2.5em;
-    box-shadow: 0 -0.5em hsla(337deg, 84%, 48%, 0.75), 0 0.5em hsla(190deg, 61%, 65%, 0.75);
-  }
-  70% {
-    width: 0.5em;
-    box-shadow: -1em -0.5em hsla(337deg, 84%, 48%, 0.75), 1em 0.5em hsla(190deg, 61%, 65%, 0.75);
-  }
-  100% {
-    box-shadow: 1em -0.5em hsla(337deg, 84%, 48%, 0.75), -1em 0.5em hsla(190deg, 61%, 65%, 0.75);
-  }
+  animation: after 2s infinite;
 }
 
 @keyframes before {
   0% {
     width: 0.5em;
-    box-shadow: 1em -0.5em hsla(337deg, 84%, 48%, 0.75), -1em 0.5em hsla(190deg, 61%, 65%, 0.75);
+    box-shadow: 1em -0.5em hsla(337, 84%, 48%, 0.75), -1em 0.5em hsla(190, 61%, 65%, 0.75);
   }
   35% {
     width: 2.5em;
-    box-shadow: 0 -0.5em hsla(337deg, 84%, 48%, 0.75), 0 0.5em hsla(190deg, 61%, 65%, 0.75);
+    box-shadow: 0 -0.5em hsla(337, 84%, 48%, 0.75), 0 0.5em hsla(190, 61%, 65%, 0.75);
   }
   70% {
     width: 0.5em;
-    box-shadow: -1em -0.5em hsla(337deg, 84%, 48%, 0.75), 1em 0.5em hsla(190deg, 61%, 65%, 0.75);
+    box-shadow: -1em -0.5em hsla(337, 84%, 48%, 0.75), 1em 0.5em hsla(190, 61%, 65%, 0.75);
   }
   100% {
-    box-shadow: 1em -0.5em hsla(337deg, 84%, 48%, 0.75), -1em 0.5em hsla(190deg, 61%, 65%, 0.75);
-  }
-}
-@-webkit-keyframes after {
-  0% {
-    height: 0.5em;
-    box-shadow: 0.5em 1em hsla(160deg, 50%, 48%, 0.75), -0.5em -1em hsla(41deg, 82%, 52%, 0.75);
-  }
-  35% {
-    height: 2.5em;
-    box-shadow: 0.5em 0 hsla(160deg, 50%, 48%, 0.75), -0.5em 0 hsla(41deg, 82%, 52%, 0.75);
-  }
-  70% {
-    height: 0.5em;
-    box-shadow: 0.5em -1em hsla(160deg, 50%, 48%, 0.75), -0.5em 1em hsla(41deg, 82%, 52%, 0.75);
-  }
-  100% {
-    box-shadow: 0.5em 1em hsla(160deg, 50%, 48%, 0.75), -0.5em -1em hsla(41deg, 82%, 52%, 0.75);
+    box-shadow: 1em -0.5em hsla(337, 84%, 48%, 0.75), -1em 0.5em hsla(190, 61%, 65%, 0.75);
   }
 }
 @keyframes after {
   0% {
     height: 0.5em;
-    box-shadow: 0.5em 1em hsla(160deg, 50%, 48%, 0.75), -0.5em -1em hsla(41deg, 82%, 52%, 0.75);
+    box-shadow: 0.5em 1em hsla(160, 50%, 48%, 0.75), -0.5em -1em hsla(41, 82%, 52%, 0.75);
   }
   35% {
     height: 2.5em;
-    box-shadow: 0.5em 0 hsla(160deg, 50%, 48%, 0.75), -0.5em 0 hsla(41deg, 82%, 52%, 0.75);
+    box-shadow: 0.5em 0 hsla(160, 50%, 48%, 0.75), -0.5em 0 hsla(41, 82%, 52%, 0.75);
   }
   70% {
     height: 0.5em;
-    box-shadow: 0.5em -1em hsla(160deg, 50%, 48%, 0.75), -0.5em 1em hsla(41deg, 82%, 52%, 0.75);
+    box-shadow: 0.5em -1em hsla(160, 50%, 48%, 0.75), -0.5em 1em hsla(41, 82%, 52%, 0.75);
   }
   100% {
-    box-shadow: 0.5em 1em hsla(160deg, 50%, 48%, 0.75), -0.5em -1em hsla(41deg, 82%, 52%, 0.75);
+    box-shadow: 0.5em 1em hsla(160, 50%, 48%, 0.75), -0.5em -1em hsla(41, 82%, 52%, 0.75);
   }
-}/*# sourceMappingURL=style.css.map */
+}
